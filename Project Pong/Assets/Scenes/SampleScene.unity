@@ -1614,6 +1614,7 @@ MonoBehaviour:
   bullet: {fileID: 5438957315658540826, guid: 7039bad7cd91cc040bf1ab9c1d140feb, type: 3}
   firePosition: {fileID: 1114176244}
   mainCam: {fileID: 1687258585}
+  muzzleFlash: {fileID: 6013890894387117823, guid: 1fd1f1e195fad6f4e9f9a55c9a799a10, type: 3}
 --- !u!1 &1143979997
 GameObject:
   m_ObjectHideFlags: 0
