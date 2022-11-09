@@ -9,6 +9,8 @@ public class PlayerShoot : MonoBehaviour
     public Transform firePosition;
     public Transform mainCam;
     public GameObject muzzleFlash;
+    
+    public MuzzleFlash mf;
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +42,9 @@ public class PlayerShoot : MonoBehaviour
                 //firePosition looks at a position in front of the camera view that looks like the center of the screen
                 firePosition.LookAt(mainCam.position + (mainCam.forward * 50f));
             }
-            Instantiate(muzzleFlash, firePosition.position, firePosition.rotation);
+            mf.MuzzleFlashing();
             Instantiate(bullet, firePosition.position, firePosition.rotation);
         }
+        
     }
 }
