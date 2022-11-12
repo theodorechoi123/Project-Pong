@@ -9,6 +9,7 @@ public class PlayerShoot : MonoBehaviour
     public Transform firePosition;
     public Transform mainCam;
     public GameObject muzzleFlash;
+    public GameObject bulletHole;
     
     public MuzzleFlash mf;
 
@@ -35,6 +36,7 @@ public class PlayerShoot : MonoBehaviour
                 {
                     //firePosition looks at the raycast hit point
                     firePosition.LookAt(hit.point);
+                    Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
                 }
             }
             else
