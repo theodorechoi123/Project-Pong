@@ -36,7 +36,8 @@ public class PlayerShoot : MonoBehaviour
                 {
                     //firePosition looks at the raycast hit point
                     firePosition.LookAt(hit.point);
-                    Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                    var bulletHoleInstance = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(bulletHoleInstance, 5f);
                 }
             }
             else
