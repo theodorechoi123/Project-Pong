@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     public float jumpHeight = 3f;
 
+    [Header("Animations")]
+    public Animator animator;
+
     private Vector3 velocity;
     private bool isGrounded;
 
@@ -26,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
+        MovementAnimations();
     }
 
     void Movement()
@@ -46,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
         //.Move is how the character controller moves the player
         controller.Move(move * speed * Time.deltaTime);
 
+        //if player not moving, go to idle state
+        if(move.magnitude == 0f)
+        {
+            animator.SetBool("isWalking", false);
+        }
+
         //JUMPING
         if(Input.GetKey(KeyCode.Space) && isGrounded)
         {
@@ -55,5 +65,15 @@ public class PlayerMovement : MonoBehaviour
         //GRAVITY
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void MovementAnimations()
+    {
+        //if player pressed wasd, play walking animation
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
+        {
+            animator.SetBool("isWalking", true);
+        }
+        
     }
 }
