@@ -5,30 +5,61 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Shooting")]
+    public MuzzleFlash mf;
     public GameObject bullet;
     public Transform firePosition;
     public Transform mainCam;
     public GameObject muzzleFlash;
     public GameObject bulletHole;
+    public bool canAutoFire;
+    public float timeBetweenShots;
+
+    private bool shooting, readyToShoot = true;
+
+    [Header("Reloading")]
+    public int bulletsAvailable;
+    public int totalBullets;
+    public int magazineSize;
+    public float reloadTime;
+
+    private bool reloading;
     
-    public MuzzleFlash mf;
+    
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        totalBullets -= magazineSize;
+        bulletsAvailable = magazineSize;
     }
 
     // Update is called once per frame
     void Update()
     {
         Shoot();
+        GunManager();
+    }
+
+    void GunManager()
+    {
+        if(Input.GetKeyDown(KeyCode.R) && bulletsAvailable < magazineSize && !reloading)
+        {
+            Reload();
+        }
     }
 
     void Shoot()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(canAutoFire)
         {
+            shooting = Input.GetMouseButton(0);
+        }
+        else
+            shooting = Input.GetMouseButtonDown(0);
+        if(shooting && readyToShoot && bulletsAvailable > 0 && !reloading)
+        {
+            readyToShoot = false;
             RaycastHit hit;
             if(Physics.Raycast(mainCam.position, mainCam.forward, out hit, 100f))
             {
@@ -47,17 +78,57 @@ public class PlayerShoot : MonoBehaviour
                         Destroy(hit.collider.gameObject);
                     }
                 }
-
-                
             }
             else
             {
                 //firePosition looks at a position in front of the camera view that looks like the center of the screen
                 firePosition.LookAt(mainCam.position + (mainCam.forward * 50f));
             }
+
+            bulletsAvailable--;
+            
+            //muzzle flashing by calling the MuzzleFlash script
             mf.MuzzleFlashing();
-            Instantiate(bullet, firePosition.position, firePosition.rotation);
+            //creates a bullet
+            Instantiate(bullet, firePosition.position, firePosition.rotation, firePosition);
+
+            //takes time to resetshot
+            StartCoroutine(ResetShot());
+
+            
         }
         
+    }
+
+    void Reload()
+    {
+        int bulletsToAdd = magazineSize - bulletsAvailable;
+
+        if(totalBullets > bulletsToAdd)
+        {
+            totalBullets -= bulletsToAdd;
+            bulletsAvailable = magazineSize;
+        }
+        else
+        {
+            bulletsAvailable += totalBullets;
+            totalBullets = 0;
+        }
+
+        reloading = true;
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    IEnumerator ReloadCoroutine()
+    {
+        yield return new WaitForSeconds(reloadTime);
+
+        reloading = false;
+    }
+
+    IEnumerator ResetShot()
+    {
+        yield return new WaitForSeconds(timeBetweenShots);
+        readyToShoot = true;
     }
 }
