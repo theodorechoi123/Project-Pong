@@ -21,8 +21,12 @@ public class PlayerShoot : MonoBehaviour
     public int totalBullets;
     public int magazineSize;
     public float reloadTime;
-
+    
     private bool reloading;
+
+    [Header("UI")]
+    private UICanvasController uiCanvas;
+
     
     
     
@@ -32,6 +36,8 @@ public class PlayerShoot : MonoBehaviour
     {
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
+
+        uiCanvas = FindObjectOfType<UICanvasController>();
     }
 
     // Update is called once per frame
@@ -39,6 +45,7 @@ public class PlayerShoot : MonoBehaviour
     {
         Shoot();
         GunManager();
+        UpdateAmmoText();
     }
 
     void GunManager()
@@ -130,5 +137,11 @@ public class PlayerShoot : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenShots);
         readyToShoot = true;
+    }
+
+    void UpdateAmmoText()
+    {
+        uiCanvas.ammoText.SetText(bulletsAvailable + "/" + magazineSize);
+        uiCanvas.totalAmmoText.SetText(totalBullets.ToString());
     }
 }
