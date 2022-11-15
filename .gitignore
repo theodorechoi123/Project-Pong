@@ -58,3 +58,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Project Pong/Assets/StylizedCharacter/Animations/Character/Human/Female/A_Hu_F_IdlePreview.fbx
+*.meta
+*.mat
+*.fbx
+*.prefab
+*.cs
+*.tga
