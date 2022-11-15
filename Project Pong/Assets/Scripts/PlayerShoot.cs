@@ -27,6 +27,15 @@ public class PlayerShoot : MonoBehaviour
     [Header("UI")]
     private UICanvasController uiCanvas;
 
+    [Header("Animations / Scoping")]
+    public Animator animator;
+    public bool isScoped = false;
+    public GameObject scopeOverlay;
+    public GameObject gunModel;
+    public Camera myCamera;
+    public float scopedFOV = 15f;
+    public float normalFOV;
+
     
     
     
@@ -38,6 +47,7 @@ public class PlayerShoot : MonoBehaviour
         bulletsAvailable = magazineSize;
 
         uiCanvas = FindObjectOfType<UICanvasController>();
+        normalFOV = myCamera.fieldOfView;
     }
 
     // Update is called once per frame
@@ -46,6 +56,7 @@ public class PlayerShoot : MonoBehaviour
         Shoot();
         GunManager();
         UpdateAmmoText();
+        Scope();
     }
 
     void GunManager()
@@ -143,5 +154,37 @@ public class PlayerShoot : MonoBehaviour
     {
         uiCanvas.ammoText.SetText(bulletsAvailable + "/" + magazineSize);
         uiCanvas.totalAmmoText.SetText(totalBullets.ToString());
+    }
+
+    void Scope()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            isScoped = !isScoped;
+            animator.SetBool("isScoping", isScoped);
+        }
+        if(isScoped)
+        {
+            StartCoroutine(OnScoped());
+        }
+        else
+            OnUnscoped();
+    }
+
+    void OnUnscoped()
+    {
+        scopeOverlay.SetActive(false);
+        gunModel.SetActive(true);
+
+        myCamera.fieldOfView = normalFOV;
+    }
+
+    IEnumerator OnScoped()
+    {
+        yield return new WaitForSeconds(.15f);
+        scopeOverlay.SetActive(true);
+        gunModel.SetActive(false);
+
+        myCamera.fieldOfView = scopedFOV;
     }
 }
