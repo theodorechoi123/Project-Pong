@@ -748,7 +748,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31856
+  m_Name: pb_Mesh31860
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -989,6 +989,7 @@ MonoBehaviour:
   attackTime: 1
   firePosition: {fileID: 0}
   meleeAttacker: 1
+  meleeDamageAmount: 0
 --- !u!195 &849891745
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1043,7 +1044,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31970
+  m_Name: pb_Mesh31976
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1904,7 +1905,7 @@ MonoBehaviour:
   myCamera: {fileID: 1687258584}
   scopedFOV: 30
   normalFOV: 60
-  bloodSplat: {fileID: 0}
+  bloodSplat: {fileID: 6348660830197625782, guid: 648d24a38b01e824988458a561759456, type: 3}
   damageAmount: 80
 --- !u!43 &1041378075
 Mesh:
@@ -1912,7 +1913,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31936
+  m_Name: pb_Mesh31942
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2595,6 +2596,7 @@ MonoBehaviour:
   attackTime: 1
   firePosition: {fileID: 1592504262}
   meleeAttacker: 0
+  meleeDamageAmount: 0
 --- !u!195 &1288348320
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4815,7 +4817,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32000
+  m_Name: pb_Mesh32008
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
