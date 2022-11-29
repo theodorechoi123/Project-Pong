@@ -917,6 +917,7 @@ GameObject:
   - component: {fileID: 849891742}
   - component: {fileID: 849891746}
   - component: {fileID: 849891745}
+  - component: {fileID: 849891747}
   - component: {fileID: 849891744}
   - component: {fileID: 849891743}
   m_Layer: 0
@@ -1023,13 +1024,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.92090166, y: 1.73541, z: 1}
   m_Center: {x: 0.0036426187, y: 0.8511559, z: 0}
+--- !u!114 &849891747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849891741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e031e611be5504f8a0639f37064701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
 --- !u!43 &853464550
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31968
+  m_Name: pb_Mesh31970
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1890,13 +1904,15 @@ MonoBehaviour:
   myCamera: {fileID: 1687258584}
   scopedFOV: 30
   normalFOV: 60
+  bloodSplat: {fileID: 0}
+  damageAmount: 80
 --- !u!43 &1041378075
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31924
+  m_Name: pb_Mesh31936
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2512,6 +2528,7 @@ GameObject:
   - component: {fileID: 1288348318}
   - component: {fileID: 1288348317}
   - component: {fileID: 1288348320}
+  - component: {fileID: 1288348322}
   - component: {fileID: 1288348319}
   - component: {fileID: 1288348321}
   m_Layer: 0
@@ -2619,6 +2636,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1288348322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288348316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e031e611be5504f8a0639f37064701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
 --- !u!1001 &1298957925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4785,7 +4815,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32012
+  m_Name: pb_Mesh32000
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

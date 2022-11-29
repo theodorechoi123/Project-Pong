@@ -35,8 +35,10 @@ public class PlayerShoot : MonoBehaviour
     public Camera myCamera;
     public float scopedFOV = 15f;
     public float normalFOV;
+    public GameObject bloodSplat;
 
-    
+    [Header("DIFFERENT GUN DMG")]
+    public int damageAmount;
     
     
 
@@ -93,7 +95,8 @@ public class PlayerShoot : MonoBehaviour
                     }
                     if(hit.collider.tag == "Enemy")
                     {
-                        Destroy(hit.collider.gameObject);
+                        hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage(damageAmount);
+                        Instantiate(bloodSplat, hit.point, Quaternion.LookRotation(hit.normal));
                     }
                 }
             }
