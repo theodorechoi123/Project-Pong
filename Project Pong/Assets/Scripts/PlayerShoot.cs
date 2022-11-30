@@ -6,14 +6,12 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Shooting")]
     public MuzzleFlash mf;
-    public GameObject bullet;
     public Transform firePosition;
     public Transform mainCam;
     public GameObject muzzleFlash;
     public GameObject bulletHole;
     public bool canAutoFire;
     public float timeBetweenShots;
-
     private bool shooting, readyToShoot = true;
 
     [Header("Reloading")]
@@ -29,6 +27,7 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Animations / Scoping")]
     public Animator gunAnimator;
+    public bool canScope = false;
     public bool isScoped = false;
     public GameObject scopeOverlay;
     public GameObject gunModel;
@@ -83,7 +82,7 @@ public class PlayerShoot : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(mainCam.position, mainCam.forward, out hit, 100f))
             {
-                if(Vector3.Distance(mainCam.position, hit.point) > 2f)
+                if(Vector3.Distance(mainCam.position, hit.point) > 0f)
                 {
                     //firePosition looks at the raycast hit point
                     firePosition.LookAt(hit.point);
@@ -110,8 +109,6 @@ public class PlayerShoot : MonoBehaviour
             
             //muzzle flashing by calling the MuzzleFlash script
             mf.MuzzleFlashing();
-            //creates a bullet
-            Instantiate(bullet, firePosition.position, firePosition.rotation, firePosition);
 
             //takes time to resetshot
             StartCoroutine(ResetShot());
@@ -161,7 +158,7 @@ public class PlayerShoot : MonoBehaviour
 
     void Scope()
     {
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1) && canScope)
         {
             isScoped = !isScoped;
             gunAnimator.SetBool("isScoping", isScoped);
