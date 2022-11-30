@@ -28,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
     private UICanvasController uiCanvas;
 
     [Header("Animations / Scoping")]
-    public Animator animator;
+    public Animator gunAnimator;
     public bool isScoped = false;
     public GameObject scopeOverlay;
     public GameObject gunModel;
@@ -164,7 +164,7 @@ public class PlayerShoot : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             isScoped = !isScoped;
-            animator.SetBool("isScoping", isScoped);
+            gunAnimator.SetBool("isScoping", isScoped);
         }
         if(isScoped)
         {
