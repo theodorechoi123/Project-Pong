@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
-        MovementAnimations();
     }
 
     void Movement()
@@ -49,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
         //.Move is how the character controller moves the player
         controller.Move(move * speed * Time.deltaTime);
+        animator.SetBool("isWalking", true);
 
         //if player not moving, go to idle state
         if(move.magnitude == 0f)
@@ -65,15 +65,5 @@ public class PlayerMovement : MonoBehaviour
         //GRAVITY
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-    }
-
-    void MovementAnimations()
-    {
-        //if player pressed wasd, play walking animation
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isWalking", true);
-        }
-        
     }
 }
