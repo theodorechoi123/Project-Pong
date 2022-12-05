@@ -25,6 +25,7 @@ public class PlayerShoot : MonoBehaviour
     public int magazineSize;
     public float reloadTime;
     public bool reloading;
+    public int pickupBulletAmount;
 
     [Header("UI")]
     private UICanvasController uiCanvas;
@@ -154,6 +155,11 @@ public class PlayerShoot : MonoBehaviour
             
         }
         
+    }
+
+    public void AddAmmo()
+    {
+        totalBullets += pickupBulletAmount;
     }
 
     void Reload()
