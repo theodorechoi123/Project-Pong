@@ -8,10 +8,14 @@ public class BulletController : MonoBehaviour
     public float speed;
     public Rigidbody myRigidbody;
     public float bulletLife = 2f;
+    public bool isRocket;
+    public GameObject explosionEffect;
+    private ParticleSystem rocketTrail;
 
     // Start is called before the first frame update
     void Start()
     {
+        rocketTrail = GetComponentInChildren<ParticleSystem>();
         
     }
 
@@ -32,10 +36,13 @@ public class BulletController : MonoBehaviour
         myRigidbody.velocity = transform.forward * speed;
     }
 
-    
-
     void OnTriggerEnter(Collider other)
     {
+        if(isRocket)
+        {
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 }

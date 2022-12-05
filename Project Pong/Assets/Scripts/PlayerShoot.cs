@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Shooting")]
+    public GameObject bullet;
+    public bool isRocketLauncher;
     public MuzzleFlash mf;
     public Transform firePosition;
     public Transform mainCam;
@@ -12,15 +14,17 @@ public class PlayerShoot : MonoBehaviour
     public GameObject bulletHole;
     public bool canAutoFire;
     public float timeBetweenShots;
-    private bool shooting, readyToShoot = true;
+    public string gunName;
+    public bool readyToShoot = true;
+    private bool shooting;
+    
 
     [Header("Reloading")]
     public int bulletsAvailable;
     public int totalBullets;
     public int magazineSize;
     public float reloadTime;
-    
-    private bool reloading;
+    public bool reloading;
 
     [Header("UI")]
     private UICanvasController uiCanvas;
@@ -35,6 +39,7 @@ public class PlayerShoot : MonoBehaviour
     public float scopedFOV = 15f;
     public float normalFOV;
     public GameObject bloodSplat;
+    private string gunAnimationName;
 
     [Header("DIFFERENT GUN DMG")]
     public int damageAmount;
@@ -58,6 +63,7 @@ public class PlayerShoot : MonoBehaviour
         GunManager();
         UpdateAmmoText();
         Scope();
+        AnimationManager();
     }
 
     void GunManager()
@@ -65,6 +71,27 @@ public class PlayerShoot : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) && bulletsAvailable < magazineSize && !reloading)
         {
             Reload();
+        }
+    }
+
+    void AnimationManager()
+    {
+        switch(gunName)
+        {
+            case "SniperRifle":
+                gunAnimationName = "sniperRifleReload";
+                break;
+            case "DrumGun":
+                gunAnimationName = "drumGunReload";
+                break;
+            case "RocketLauncher":
+                gunAnimationName = "rocketLauncherReload";
+                break;
+            case "BipodGun":
+                gunAnimationName = "bipodGunReload";
+                break;
+            default:
+                break;
         }
     }
 
@@ -86,17 +113,20 @@ public class PlayerShoot : MonoBehaviour
                 {
                     //firePosition looks at the raycast hit point
                     firePosition.LookAt(hit.point);
+                    if(!isRocketLauncher)
+                    {
+                        if(hit.collider.tag == "Ground")
+                        {
+                            var bulletHoleInstance = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                            Destroy(bulletHoleInstance, 5f);
+                        }
+                    }
+                }
 
-                    if(hit.collider.tag == "Ground")
-                    {
-                        var bulletHoleInstance = Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
-                        Destroy(bulletHoleInstance, 5f);
-                    }
-                    if(hit.collider.tag == "Enemy")
-                    {
-                        hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage(damageAmount);
-                        Instantiate(bloodSplat, hit.point, Quaternion.LookRotation(hit.normal));
-                    }
+                if(hit.collider.tag == "Enemy" && !isRocketLauncher)
+                {
+                    hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage(damageAmount);
+                    Instantiate(bloodSplat, hit.point, Quaternion.LookRotation(hit.normal));
                 }
             }
             else
@@ -107,8 +137,16 @@ public class PlayerShoot : MonoBehaviour
 
             bulletsAvailable--;
             
-            //muzzle flashing by calling the MuzzleFlash script
-            mf.MuzzleFlashing();
+            if(!isRocketLauncher)
+            {
+                //muzzle flashing by calling the MuzzleFlash script
+                mf.MuzzleFlashing();
+            }
+            else
+            {
+                Instantiate(bullet, firePosition.position, firePosition.rotation);
+            }
+            
 
             //takes time to resetshot
             StartCoroutine(ResetShot());
@@ -120,6 +158,15 @@ public class PlayerShoot : MonoBehaviour
 
     void Reload()
     {
+        gunAnimator.SetTrigger(gunAnimationName);
+        reloading = true;
+        
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    IEnumerator ReloadCoroutine()
+    {
+        yield return new WaitForSeconds(reloadTime);
         int bulletsToAdd = magazineSize - bulletsAvailable;
 
         if(totalBullets > bulletsToAdd)
@@ -132,15 +179,6 @@ public class PlayerShoot : MonoBehaviour
             bulletsAvailable += totalBullets;
             totalBullets = 0;
         }
-
-        reloading = true;
-        StartCoroutine(ReloadCoroutine());
-    }
-
-    IEnumerator ReloadCoroutine()
-    {
-        yield return new WaitForSeconds(reloadTime);
-
         reloading = false;
     }
 
