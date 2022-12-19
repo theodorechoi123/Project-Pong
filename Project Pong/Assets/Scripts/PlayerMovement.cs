@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.Space) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            AudioManager.instance.PlayerSFX(7);
         }
 
         //GRAVITY

@@ -41,6 +41,7 @@ public class PlayerShoot : MonoBehaviour
     public float normalFOV;
     public GameObject bloodSplat;
     private string gunAnimationName;
+    private int gunSFXNumber;
 
     [Header("DIFFERENT GUN DMG")]
     public int damageAmount;
@@ -81,15 +82,19 @@ public class PlayerShoot : MonoBehaviour
         {
             case "SniperRifle":
                 gunAnimationName = "sniperRifleReload";
+                gunSFXNumber = 3;
                 break;
             case "DrumGun":
                 gunAnimationName = "drumGunReload";
+                gunSFXNumber = 4;
                 break;
             case "RocketLauncher":
                 gunAnimationName = "rocketLauncherReload";
+                gunSFXNumber = 5;
                 break;
             case "BipodGun":
                 gunAnimationName = "bipodGunReload";
+                gunSFXNumber = 6;
                 break;
             default:
                 break;
@@ -165,6 +170,8 @@ public class PlayerShoot : MonoBehaviour
     void Reload()
     {
         gunAnimator.SetTrigger(gunAnimationName);
+        AudioManager.instance.PlayerSFX(gunSFXNumber);
+        
         reloading = true;
         
         StartCoroutine(ReloadCoroutine());
