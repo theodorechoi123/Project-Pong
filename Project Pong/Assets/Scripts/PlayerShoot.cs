@@ -51,6 +51,7 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
 
@@ -132,6 +133,7 @@ public class PlayerShoot : MonoBehaviour
                 if(hit.collider.tag == "Enemy" && !isRocketLauncher)
                 {
                     hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage(damageAmount);
+                    AudioManager.instance.PlayerSFX(10);
                     Instantiate(bloodSplat, hit.point, Quaternion.LookRotation(hit.normal));
                 }
             }
