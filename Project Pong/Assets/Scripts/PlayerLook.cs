@@ -9,17 +9,23 @@ public class PlayerLook : MonoBehaviour
     public float mouseSens = 100f;
 
     private float xRotation = 0f;
+    private PlayerMovement playerMovement;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerMovement = GetComponentInParent(typeof(PlayerMovement)) as PlayerMovement;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MouseMovement();
+        if(!playerMovement.isDead)
+        {
+            MouseMovement();
+        }
+        
     }
 
     void MouseMovement()

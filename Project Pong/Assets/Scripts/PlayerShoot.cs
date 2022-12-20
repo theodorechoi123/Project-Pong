@@ -16,6 +16,7 @@ public class PlayerShoot : MonoBehaviour
     public float timeBetweenShots;
     public string gunName;
     public bool readyToShoot = true;
+    private PlayerMovement playerMovement;
     private bool shooting;
     
 
@@ -51,7 +52,7 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        playerMovement = GetComponentInParent(typeof(PlayerMovement)) as PlayerMovement;
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
 
@@ -62,11 +63,15 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shoot();
-        GunManager();
-        UpdateAmmoText();
-        Scope();
-        AnimationManager();
+        if(!playerMovement.isDead)
+        {
+            Shoot();
+            GunManager();
+            UpdateAmmoText();
+            Scope();
+            AnimationManager();
+        }
+        
     }
 
     void GunManager()
