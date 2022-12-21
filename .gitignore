@@ -69,3 +69,5 @@ Project Pong/Assets/StylizedCharacter/Animations/Character/Human/Female/A_Hu_F_I
 *.flac
 *.ogg
 *.wav
+*.asset
+*.otf
