@@ -63,6 +63,10 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PauseMenu.gameIsPaused)
+        {
+            return;
+        }
         if(!playerMovement.isDead)
         {
             Shoot();
