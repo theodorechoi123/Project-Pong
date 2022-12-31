@@ -18,12 +18,13 @@ public class MuzzleFlash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentGunName = switchSystem.activeGun.gunName;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentGunName = switchSystem.activeGun.gunName;
         AudioManager();
         timer += Time.deltaTime;
         if(timer > mzMaxTimer)
