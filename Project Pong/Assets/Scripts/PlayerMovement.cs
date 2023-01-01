@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public CharacterController controller;
+    public ShopManager shopManager;
     public float speed = 2f;
     public float gravity = -9.81f;
     public Transform groundCheck;
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        if(!isDead)
+        if(!isDead && !shopManager.inShop)
         {
             //checks if player is grounded
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -61,6 +62,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isWalking", true);
             }
+            
+            //if game is paused, stop walking
+            if(PauseMenu.gameIsPaused)
+            {
+                animator.SetBool("isWalking", false);
+            }
 
             //JUMPING
             if(Input.GetKey(KeyCode.Space) && isGrounded)
@@ -68,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 AudioManager.instance.PlayerSFX(7);
             }
+
+            
 
             //GRAVITY
             velocity.y += gravity * Time.deltaTime;

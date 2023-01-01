@@ -6,6 +6,7 @@ public class MuzzleFlash : MonoBehaviour
 {
     [Header("Muzzle Flash")]
     public GameObject muzzleFlash;
+    public Animator animator;
     public float mzMaxTimer = 1f;
     public float timer = 0f;
     public bool isFlashing;
@@ -39,6 +40,7 @@ public class MuzzleFlash : MonoBehaviour
         isFlashing = true;
         muzzleFlash.SetActive(true);
         audioManager.PlayerSFX(sfxNumber);
+        animator.SetTrigger("isShooting");
         timer = 0f;
     }
 

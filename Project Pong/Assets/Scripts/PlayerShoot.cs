@@ -209,7 +209,6 @@ public class PlayerShoot : MonoBehaviour
     IEnumerator ResetShot()
     {
         yield return new WaitForSeconds(timeBetweenShots);
-        gunAnimator.SetTrigger("isShooting");
         readyToShoot = true;
     }
 
