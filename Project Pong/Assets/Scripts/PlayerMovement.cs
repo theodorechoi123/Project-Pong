@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        if(!isDead && !shopManager.inShop)
+        if(!isDead)
         {
             //checks if player is grounded
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -56,17 +56,17 @@ public class PlayerMovement : MonoBehaviour
             //if player not moving, go to idle state
             if(move.magnitude == 0f)
             {
-                animator.SetBool("isWalking", false);
+                animator.SetFloat("speed", 0f, 0.1f, Time.deltaTime);
             }
             else
             {
-                animator.SetBool("isWalking", true);
+                animator.SetFloat("speed", 1f, 0.1f, Time.deltaTime);
             }
             
             //if game is paused, stop walking
-            if(PauseMenu.gameIsPaused)
+            if(PauseMenu.gameIsPaused || ShopManager.inShop)
             {
-                animator.SetBool("isWalking", false);
+                animator.SetFloat("speed", 0f, 0.1f, Time.deltaTime);
             }
 
             //JUMPING
@@ -75,8 +75,6 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 AudioManager.instance.PlayerSFX(7);
             }
-
-            
 
             //GRAVITY
             velocity.y += gravity * Time.deltaTime;

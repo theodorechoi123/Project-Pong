@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Shooting")]
+    public float spread;
     public GameObject bullet;
     public bool isRocketLauncher;
     public MuzzleFlash mf;
@@ -30,6 +31,7 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("UI")]
     private UICanvasController uiCanvas;
+    private ShopManager shopManager;
 
     [Header("Animations / Scoping")]
     public Animator gunAnimator;
@@ -44,6 +46,13 @@ public class PlayerShoot : MonoBehaviour
     private string gunAnimationName;
     private int gunSFXNumber;
 
+    [Header("Sway")]
+    public float intensity;
+    public float smooth;
+
+    private Quaternion originRotation;
+
+
     [Header("DIFFERENT GUN DMG")]
     public int damageAmount;
     
@@ -52,6 +61,10 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        originRotation = transform.localRotation;
+
+        shopManager = FindObjectOfType<ShopManager>();
+
         playerMovement = GetComponentInParent(typeof(PlayerMovement)) as PlayerMovement;
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
@@ -74,6 +87,7 @@ public class PlayerShoot : MonoBehaviour
             UpdateAmmoText();
             Scope();
             AnimationManager();
+            GunSway();
         }
         
     }
@@ -111,6 +125,22 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    void GunSway()
+    {
+        //the "t" in front of the variables mean temporary
+        //get the x and y axis
+        float txMouse = Input.GetAxis("Mouse X");
+        float tyMouse = Input.GetAxis("Mouse Y");
+
+        //calculate target rotation
+        Quaternion txAdj = Quaternion.AngleAxis(-intensity * txMouse, Vector3.up);
+        Quaternion tyAdj = Quaternion.AngleAxis(intensity * tyMouse, Vector3.right);
+        Quaternion targetRotation = txAdj * originRotation * tyAdj;
+
+        //rotate towards target rotation
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * smooth);
+    }
+
     void Shoot()
     {
         if(canAutoFire)
@@ -119,11 +149,18 @@ public class PlayerShoot : MonoBehaviour
         }
         else
             shooting = Input.GetMouseButtonDown(0);
-        if(shooting && readyToShoot && bulletsAvailable > 0 && !reloading)
+        if(shooting && readyToShoot && bulletsAvailable > 0 && !reloading && !ShopManager.inShop)
         {
+            //spread
+            float x = Random.Range(-spread, spread);
+            float y = Random.Range(-spread, spread);
+
+            //calculate direction with spread
+            Vector3 direction = mainCam.forward + new Vector3(x, y, 0);
+
             readyToShoot = false;
             RaycastHit hit;
-            if(Physics.Raycast(mainCam.position, mainCam.forward, out hit, 100f))
+            if(Physics.Raycast(mainCam.position, direction, out hit, 100f))
             {
                 if(Vector3.Distance(mainCam.position, hit.point) > 0f)
                 {
