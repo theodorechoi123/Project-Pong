@@ -52,6 +52,21 @@ public class PlayerShoot : MonoBehaviour
 
     private Quaternion originRotation;
 
+    [Header("Recoil")]
+    //hipfire recoil
+    public float recoilX;
+    public float recoilY;
+    public float recoilZ;
+
+    //standing still recoil
+    public float standRecoilX;
+    public float standRecoilY;
+    public float standRecoilZ;
+
+    //Settings
+    public float snappiness;
+    public float returnSpeed;
+
 
     [Header("DIFFERENT GUN DMG")]
     public int damageAmount;
@@ -108,18 +123,50 @@ public class PlayerShoot : MonoBehaviour
             case "SniperRifle":
                 gunAnimationName = "sniperRifleReload";
                 gunSFXNumber = 3;
+                recoilX = -4f;
+                recoilY = 4f;
+                recoilZ = 0.35f;
+                standRecoilX = -2f;
+                standRecoilY = 2f;
+                recoilZ = 0.35f;
+                snappiness = 6;
+                returnSpeed = 2;
                 break;
             case "DrumGun":
                 gunAnimationName = "drumGunReload";
                 gunSFXNumber = 4;
+                recoilX = -4f;
+                recoilY = 4f;
+                recoilZ = 0.55f;
+                standRecoilX = -1f;
+                standRecoilY = 1f;
+                recoilZ = 0.25f;
+                snappiness = 6;
+                returnSpeed = 2;
                 break;
             case "RocketLauncher":
                 gunAnimationName = "rocketLauncherReload";
                 gunSFXNumber = 5;
+                recoilX = -4f;
+                recoilY = 4f;
+                recoilZ = 0.35f;
+                standRecoilX = -2f;
+                standRecoilY = 2f;
+                recoilZ = 0.35f;
+                snappiness = 6;
+                returnSpeed = 2;
                 break;
             case "BipodGun":
                 gunAnimationName = "bipodGunReload";
                 gunSFXNumber = 6;
+                recoilX = -2.5f;
+                recoilY = 2.5f;
+                recoilZ = 0.35f;
+                standRecoilX = -1.5f;
+                standRecoilY = 1.5f;
+                recoilZ = 0.25f;
+                snappiness = 6;
+                returnSpeed = 2;
                 break;
             default:
                 break;

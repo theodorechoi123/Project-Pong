@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     public float jumpHeight = 3f;
     public bool isDead = true;
+    public Vector3 move;
 
     [Header("Animations")]
     public Animator animator;
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             float z = Input.GetAxis("Vertical");
 
             //moves character within local, not global
-            Vector3 move = transform.right * x + transform.forward * z;
+            move = transform.right * x + transform.forward * z;
             //.Move is how the character controller moves the player
             controller.Move(move * speed * Time.deltaTime);
 
