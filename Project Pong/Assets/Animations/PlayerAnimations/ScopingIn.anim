@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.302, y: 0.054, z: -0.333}
+        value: {x: -0.302, y: 0.053, z: -0.325}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -30,13 +30,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera Holder/Main Camera/Guns/SniperRifle
+    path: CameraHolder/CameraRecoil/Main Camera/Guns/SniperRifle
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.008, y: 1.603, z: 1.013}
+        value: {x: 0.010399967, y: 1.6135, z: 1.1150002}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -46,13 +46,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera Holder/Main Camera/MuzzleFlashes/Sniper Shot w Trail
+    path: CameraHolder/CameraRecoil/Main Camera/MuzzleFlashes/Sniper Shot w Trail
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.003, y: -0.107, z: 0.918}
+        value: {x: 0.0039999485, y: -0.10300003, z: 0.9130002}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -62,7 +62,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Camera Holder/Main Camera/SniperFirePosition
+    path: CameraHolder/CameraRecoil/Main Camera/SniperFirePosition
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -74,21 +74,21 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 418385104
+      path: 3945064263
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 127148905
+      path: 3936571119
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3280961497
+      path: 3394743072
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -132,7 +132,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera Holder/Main Camera/Guns/SniperRifle
+    path: CameraHolder/CameraRecoil/Main Camera/Guns/SniperRifle
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -140,7 +140,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.054
+        value: 0.053
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -151,7 +151,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera Holder/Main Camera/Guns/SniperRifle
+    path: CameraHolder/CameraRecoil/Main Camera/Guns/SniperRifle
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -159,7 +159,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.333
+        value: -0.325
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -170,7 +170,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera Holder/Main Camera/Guns/SniperRifle
+    path: CameraHolder/CameraRecoil/Main Camera/Guns/SniperRifle
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -178,7 +178,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.008
+        value: 0.010399967
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -189,7 +189,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera Holder/Main Camera/MuzzleFlashes/Sniper Shot w Trail
+    path: CameraHolder/CameraRecoil/Main Camera/MuzzleFlashes/Sniper Shot w Trail
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -197,7 +197,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.603
+        value: 1.6135
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -208,7 +208,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera Holder/Main Camera/MuzzleFlashes/Sniper Shot w Trail
+    path: CameraHolder/CameraRecoil/Main Camera/MuzzleFlashes/Sniper Shot w Trail
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -216,7 +216,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.013
+        value: 1.1150002
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -227,7 +227,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera Holder/Main Camera/MuzzleFlashes/Sniper Shot w Trail
+    path: CameraHolder/CameraRecoil/Main Camera/MuzzleFlashes/Sniper Shot w Trail
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -235,7 +235,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.003
+        value: 0.0039999485
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -246,7 +246,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Camera Holder/Main Camera/SniperFirePosition
+    path: CameraHolder/CameraRecoil/Main Camera/SniperFirePosition
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -254,7 +254,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.107
+        value: -0.10300003
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -265,7 +265,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Camera Holder/Main Camera/SniperFirePosition
+    path: CameraHolder/CameraRecoil/Main Camera/SniperFirePosition
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -273,7 +273,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.918
+        value: 0.9130002
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -284,7 +284,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Camera Holder/Main Camera/SniperFirePosition
+    path: CameraHolder/CameraRecoil/Main Camera/SniperFirePosition
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

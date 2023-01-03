@@ -16,6 +16,9 @@ public class MuzzleFlash : MonoBehaviour
     private int sfxNumber;
     private string currentGunName;
 
+    [Header("Recoil")]
+    public Recoil recoil;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class MuzzleFlash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         currentGunName = switchSystem.activeGun.gunName;
         AudioManager();
         timer += Time.deltaTime;
@@ -41,6 +45,7 @@ public class MuzzleFlash : MonoBehaviour
         muzzleFlash.SetActive(true);
         audioManager.PlayerSFX(sfxNumber);
         animator.SetTrigger("isShooting");
+        recoil.RecoilFire();
         timer = 0f;
     }
 

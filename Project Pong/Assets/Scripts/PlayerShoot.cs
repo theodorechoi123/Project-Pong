@@ -61,6 +61,7 @@ public class PlayerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         originRotation = transform.localRotation;
 
         shopManager = FindObjectOfType<ShopManager>();
@@ -151,16 +152,16 @@ public class PlayerShoot : MonoBehaviour
             shooting = Input.GetMouseButtonDown(0);
         if(shooting && readyToShoot && bulletsAvailable > 0 && !reloading && !ShopManager.inShop)
         {
-            //spread
-            float x = Random.Range(-spread, spread);
-            float y = Random.Range(-spread, spread);
-
-            //calculate direction with spread
-            Vector3 direction = mainCam.forward + new Vector3(x, y, 0);
+            Vector3 forward = mainCam.forward;
 
             readyToShoot = false;
             RaycastHit hit;
-            if(Physics.Raycast(mainCam.position, direction, out hit, 100f))
+
+            //straight line shooting
+            var noRecoil = Physics.Raycast(mainCam.position, forward, out hit, 100f);
+            
+
+            if(noRecoil)
             {
                 if(Vector3.Distance(mainCam.position, hit.point) > 0f)
                 {
